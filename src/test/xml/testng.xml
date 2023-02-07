@@ -1,0 +1,9 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="REST Testing Demo" verbose="1" >
+    <test name="Challenge9">
+        <classes>
+            <class name="stg.challenges.Challenge9"/>
+        </classes>
+    </test>
+</suite>
