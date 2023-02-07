@@ -1,7 +1,7 @@
 ## Demo for API testing in Java
 
 Resource under test:
-[Random User Generator](https://randomuser.me/)
+[JSON Placeholder](http://jsonplaceholder.typicode.com)
 
 Libraries used:   
 1. REST-assured
