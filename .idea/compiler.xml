@@ -8,6 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="rest-java-exmpls" />
         <module name="stgwebauto-java" />
+        <module name="rest-java-demo" />
       </profile>
     </annotationProcessing>
   </component>
