@@ -1,5 +1,6 @@
 package go.rest.tests.get;
 
+import go.rest.tests.constants.Constants;
 import io.restassured.RestAssured;
 import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.specification.RequestSpecification;
@@ -12,13 +13,11 @@ import static org.hamcrest.Matchers.not;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class GoRestGetUsersTests {
-    private final String BASEURL = "https://gorest.co.in/public/v2";
-    private final String USERS_URL = BASEURL + "/users";
     private RequestSpecification httpRequest;
 
     @BeforeEach
     public void setUp() {
-        RestAssured.baseURI = USERS_URL;
+        RestAssured.baseURI = Constants.USERS_URL;
         httpRequest = RestAssured.given();
     }
     @Test
@@ -67,9 +66,9 @@ public class GoRestGetUsersTests {
     @Test
     public void getRequestToUsersEndpoint_ShouldReturnUserData(){
         var expectedUserData = new LinkedHashMap<String, Object>();
-        expectedUserData.put("id", 347286);
-        expectedUserData.put("name", "Kanchan Verma");
-        expectedUserData.put("email", "verma_kanchan@lemke.biz");
+        expectedUserData.put("id", 354475);
+        expectedUserData.put("name", "Bhadrak Chaturvedi");
+        expectedUserData.put("email", "chaturvedi_bhadrak@rosenbaum.net");
         expectedUserData.put("gender", "female");
         expectedUserData.put("status","active");
         var response = httpRequest.get();
@@ -78,7 +77,7 @@ public class GoRestGetUsersTests {
 
     @Test
     public void getRequestToUsersEndpoint_ShouldReturnUserDataForFirstUser(){
-        var expectedUserData = "Kanchan Verma";
+        var expectedUserData = "Bhadrak Chaturvedi";
         var response = httpRequest.get();
         assertEquals(response.getBody().jsonPath().getString("[0].name"), expectedUserData);
     }
