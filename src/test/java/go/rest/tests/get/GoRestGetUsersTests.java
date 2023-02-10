@@ -71,18 +71,18 @@ public class GoRestGetUsersTests {
 
     @Test
     public void getRequestToUsersEndpoint_ShouldReturnUserDataForFirstUser(){
-        var expectedUserData = "Alok Pothuvaal";
+        var expectedUserData = "Amb. Aditeya Dhawan";
         var response = httpRequest.get();
         assertEquals(response.getBody().jsonPath().getString("[0].name"), expectedUserData);
     }
 
     private static LinkedHashMap<String, Object> getExpectedUserData() {
         var expectedUserData = new LinkedHashMap<String, Object>();
-        expectedUserData.put("id", 356208);
-        expectedUserData.put("name", "Alok Pothuvaal");
-        expectedUserData.put("email", "alok_pothuvaal@beer.org");
-        expectedUserData.put("gender", "female");
-        expectedUserData.put("status","inactive");
+        expectedUserData.put("id", 365251);
+        expectedUserData.put("name", "Amb. Aditeya Dhawan");
+        expectedUserData.put("email", "dhawan_aditeya_amb@strosin.com");
+        expectedUserData.put("gender", "male");
+        expectedUserData.put("status","active");
         return expectedUserData;
     }
 }
