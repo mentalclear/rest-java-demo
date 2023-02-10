@@ -39,9 +39,8 @@ public class GoRestGetUsersTests {
     @Test
     public void getRequestToUsersEndpoint_ShouldReturnCorrectHeaders(){
         var response = httpRequest.get();
-        var headers = response.headers();
-        assertEquals(headers.getValue("Server"), "cloudflare");
-        assertEquals(headers.getValue("Content-Encoding"), "gzip");
+        assertEquals(response.headers().getValue("Server"), "cloudflare");
+        assertEquals(response.headers().getValue("Content-Encoding"), "gzip");
     }
     @Test
     public void getRequestToUsersEndpoint_ShouldReturnListOf10Users(){
@@ -52,8 +51,8 @@ public class GoRestGetUsersTests {
 
     @Test
     public void getRequestToUsersEndpoint_ShouldHaveCorrectJSONSchema(){
-        var schemaMatcher = testUtils.getSchemaMatcher("users_schema.json");        var response = httpRequest.get().then();
-
+        var schemaMatcher = testUtils.getSchemaMatcher("users_schema.json");
+        var response = httpRequest.get().then();
         response.assertThat().body(schemaMatcher);
     }
     @Test
@@ -65,20 +64,25 @@ public class GoRestGetUsersTests {
 
     @Test
     public void getRequestToUsersEndpoint_ShouldReturnUserData(){
-        var expectedUserData = new LinkedHashMap<String, Object>();
-        expectedUserData.put("id", 354475);
-        expectedUserData.put("name", "Bhadrak Chaturvedi");
-        expectedUserData.put("email", "chaturvedi_bhadrak@rosenbaum.net");
-        expectedUserData.put("gender", "female");
-        expectedUserData.put("status","active");
+        var expectedUserData = getExpectedUserData();
         var response = httpRequest.get();
         assertEquals(response.getBody().jsonPath().getMap("[0]"), expectedUserData);
     }
 
     @Test
     public void getRequestToUsersEndpoint_ShouldReturnUserDataForFirstUser(){
-        var expectedUserData = "Bhadrak Chaturvedi";
+        var expectedUserData = "Alok Pothuvaal";
         var response = httpRequest.get();
         assertEquals(response.getBody().jsonPath().getString("[0].name"), expectedUserData);
+    }
+
+    private static LinkedHashMap<String, Object> getExpectedUserData() {
+        var expectedUserData = new LinkedHashMap<String, Object>();
+        expectedUserData.put("id", 356208);
+        expectedUserData.put("name", "Alok Pothuvaal");
+        expectedUserData.put("email", "alok_pothuvaal@beer.org");
+        expectedUserData.put("gender", "female");
+        expectedUserData.put("status","inactive");
+        return expectedUserData;
     }
 }
