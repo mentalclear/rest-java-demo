@@ -1,11 +1,10 @@
 package go.rest.tests.get;
 
 import go.rest.tests.constants.Constants;
+import go.rest.tests.utils.TestUtils;
 import io.restassured.RestAssured;
-import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.specification.RequestSpecification;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 import java.util.LinkedHashMap;
 
@@ -14,9 +13,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class GoRestGetUsersTests {
     private RequestSpecification httpRequest;
+    private TestUtils testUtils;
 
     @BeforeEach
     public void setUp() {
+        testUtils = new TestUtils();
         RestAssured.baseURI = Constants.USERS_URL;
         httpRequest = RestAssured.given();
     }
@@ -51,16 +52,15 @@ public class GoRestGetUsersTests {
 
     @Test
     public void getRequestToUsersEndpoint_ShouldHaveCorrectJSONSchema(){
-        var response = httpRequest.get().then();
-        var schemaMatcher = JsonSchemaValidator.matchesJsonSchemaInClasspath("users_schema.json");
-        response.assertThat().body((schemaMatcher));
+        var schemaMatcher = testUtils.getSchemaMatcher("users_schema.json");        var response = httpRequest.get().then();
+
+        response.assertThat().body(schemaMatcher);
     }
     @Test
     public void getRequestToUsersEndpoint_ShouldFailIncorrectJSONSchema(){
+        var schemaMatcher = testUtils.getSchemaMatcher("users_schema_bad.json");
         var response = httpRequest.get().then();
-        var schemaMatcher = JsonSchemaValidator
-                .matchesJsonSchemaInClasspath("users_schema_bad.json");
-        response.assertThat().body(not((schemaMatcher)));
+        response.assertThat().body(not(schemaMatcher));
     }
 
     @Test
