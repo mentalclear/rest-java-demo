@@ -4,14 +4,15 @@ import go.rest.tests.constants.Constants;
 import go.rest.tests.utils.TestUtils;
 import io.restassured.RestAssured;
 import io.restassured.specification.RequestSpecification;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.util.LinkedHashMap;
 
 import static org.hamcrest.Matchers.not;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class GoRestGetUsersTests {
+public class GetUsersTests {
     private RequestSpecification httpRequest;
     private TestUtils testUtils;
 
